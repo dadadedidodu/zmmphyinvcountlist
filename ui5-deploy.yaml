@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "4.0"
+metadata:
+  name: zmmphyinvcountlist
+type: application
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: generateCachebusterInfo
+      configuration:
+        target:
+          destination: Development-Tenant
+          url: https://my426541.s4hana.cloud.sap
+          client: '080'
+          authenticationType: reentranceTicket # SAML support for vscode
+        app:
+          name: ZMMINVCOUNTLIST
+          description: Physical Inventory Count List
+          package: ZMM_COUNTLIST_FORM
+          transport: AK8K900541
+        exclude:
+          - /test/
+          - /localService/

@@ -1,0 +1,205 @@
+{
+  "_version": "1.80.0",
+  "sap.app": {
+    "id": "zmmphyinvcountlist",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.29.0",
+      "toolsId": "d748d725-df2f-481c-8f7f-2dccfab69a7a"
+    },
+    "dataSources": {
+      "annotation": {
+        "type": "ODataAnnotation",
+        "uri": "annotations/annotation.xml",
+        "settings": {
+          "localUri": "annotations/annotation.xml"
+        }
+      },
+      "mainService": {
+        "uri": "/sap/opu/odata4/sap/zmm_sb_countlistform_uio4/srvd/sap/zmm_sd_countlistform/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "annotation"
+          ],
+          "localUri": "localService/mainService/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "zmmphyinvcountlist-display": {
+          "semanticObject": "zmmphyinvcountlist",
+          "action": "display",
+          "title": "{{zmmphyinvcountlist-display.flpTitle}}",
+          "subTitle": "{{zmmphyinvcountlist-display.flpSubtitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          },
+          "icon": "sap-icon://clinical-task-tracker"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.142.12",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "zmmphyinvcountlist.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "CountListList",
+          "target": "CountListList"
+        },
+        {
+          "pattern": "CountList({key}):?query:",
+          "name": "CountListObjectPage",
+          "target": "CountListObjectPage"
+        }
+      ],
+      "targets": {
+        "CountListList": {
+          "type": "Component",
+          "id": "CountListList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/CountList",
+              "variantManagement": "Page",
+              "navigation": {
+                "CountList": {
+                  "detail": {
+                    "route": "CountListObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "ResponsiveTable",
+                    "enableExport": true,
+                    "personalization": {
+                      "sort": true,
+                      "group": true,
+                      "filter": true,
+                      "column": true
+                    },
+                    "widthIncludingColumnHeader": true,
+                    "selectionMode": "Single"
+                  },
+                  "actions": {
+                    "DisplayCountSheet": {
+                      "press": ".extension.zmmphyinvcountlist.ext.controller.ListReport.onDisplayCountSheet",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": true,
+                      "text": "{@i18n>displayCountSheet}"
+                    },
+                    "DownloadDatasource": {
+                      "press": ".extension.zmmphyinvcountlist.ext.controller.ListReport.onDownloadDatasource",
+                      "visible": false,
+                      "enabled": false,
+                      "requiresSelection": false,
+                      "text": "{@i18n>downloadDatasource}"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "CountListObjectPage": {
+          "type": "Component",
+          "id": "CountListObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/CountList"
+            }
+          }
+        }
+      }
+    },
+    "extends": {
+      "extensions": {
+        "sap.ui.controllerExtensions": {
+          "sap.fe.templates.ListReport.ListReportController": {
+            "controllerName": "zmmphyinvcountlist.ext.controller.ListReport"
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  },
+  "sap.fe": {
+    "app": {
+      "enableLazyLoading": true
+    }
+  }
+}
