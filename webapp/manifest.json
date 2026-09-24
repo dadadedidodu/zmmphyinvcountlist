@@ -152,8 +152,8 @@
                   "actions": {
                     "DisplayCountSheet": {
                       "press": ".extension.zmmphyinvcountlist.ext.controller.ListReport.onDisplayCountSheet",
-                      "visible": true,
-                      "enabled": true,
+                      "visible": false,
+                      "enabled": false,
                       "requiresSelection": true,
                       "text": "{@i18n>displayCountSheet}"
                     },
